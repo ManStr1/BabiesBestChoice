@@ -24,12 +24,15 @@ function simpleExecute(statement, binds = [], opts = {}) {
       conn = await oracledb.getConnection();
  
       const result = await conn.execute(statement, binds, opts);
- 
+
+      console.log(result.metaData); // [ { name: 'ITEM_ID' }, { name: 'ITEM_NAME' }, { name: 'ITEM_SIZE' } ]
+      console.log(result.rows);     // [ [ '1,2..', 'водолазка', '100' ] ]
+
       resolve(result);
     } catch (err) {
       reject(err);
     } finally {
-      if (conn) { // conn assignment worked, need to close
+      if (conn) {
         try {
           await conn.close();
         } catch (err) {

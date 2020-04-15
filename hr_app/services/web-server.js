@@ -3,23 +3,17 @@ const express = require('express');
 const webServerConfig = require('../config/web-server.js');
 const database = require('./database.js');
 const morgan = require('morgan');
- 
+const bodyParser = require('body-parser');                                            //!
+var artists;
+const app = express();
 let httpServer;
  
 function initialize() {
   return new Promise((resolve, reject) => {
-    const app = express();
+
     httpServer = http.createServer(app);
 
     app.use(morgan('combined'));
- 
-    app.get('/', async (req, res) => {
-      const result = await database.simpleExecute('select user, systimestamp from dual');
-      const user = result.rows[0].USER;
-      const date = result.rows[0].SYSTIMESTAMP;
- 
-      res.end(`DB user: ${user}\nDate: ${date}`);
-    });
  
     httpServer.listen(webServerConfig.port)
       .on('listening', () => {
@@ -34,6 +28,37 @@ function initialize() {
 }
  
 module.exports.initialize = initialize;
+app.use(bodyParser.json());                                     //!
+app.use(bodyParser.urlencoded({extended: true}));               //!
+
+app.get('/:id', async (req, res) => {                                            //!
+  var sql = `SELECT item_id, item_name, item_size FROM ` + req.params.id;
+  var result = await database.simpleExecute(sql, {});
+
+  res.send(result.rows);
+});
+
+app.get('/artists/:id', async function (req, res) {                                   //!
+  const result = await database.simpleExecute(`SELECT item_id, item_name, item_size FROM items WHERE item_id = :idbv`, [req.params.id], { maxRows:1 });
+  res.send(result.rows[0]);
+})
+
+app.put('/artists/:id', function(req, res) {                                        //!
+  //database.simpleExecute('SELECT item_id, item_name from items where item_id = ' + Number(req.params.id) + '');
+  console.log(req.params);
+  var artist = artists.find(function (artist1) {
+    return artist1.id === Number(req.params.id)
+  });
+  artist.name = req.body.name;
+  res.send(artist);
+})
+
+app.delete('/artists/:id', function (req, res) {                                    //!
+  artists = artists.filter( function (artist) {
+    return artist.id !== Number(req.params.id);
+  });
+  res.send(artists);
+}) 
 
 function close() {
   return new Promise((resolve, reject) => {
