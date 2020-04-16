@@ -1,0 +1,91 @@
+<!TYPE html>
+<html>
+	<head>
+		<link href = "style.css" rel = "stylesheet">
+		<meta http-equiv = "Content-Type" content = "text/html"; charset = "UTF-8">
+		<title>BBC</title>
+		<script defer src = "script.js"></script>
+	</head>
+	
+	<body class = "main-body">
+		
+
+		<!-- Для всей головы -->
+		<div class = "header">
+
+			<!-- Линия наверху -->
+			<div class = "header-line"></div> 
+
+			<!-- Мой блок для головы -->
+			<div class = "myinline-block">		
+
+				<!-- Кнопка навигации -->
+				<div class = "navigation">
+					<button data-modal-target = "#modal" id = "settings"></button>
+					<div class = "modal" id = "modal">
+						<div class = "modal-header">
+							<div class = "title">Категории</div>
+							<button data-close-button class = "close-button">&times;</button>
+						</div>
+						<div class = "modal-body">
+							Тут будут категории
+						</div>
+						<div class = "modal-body">Тут будут категории</div>
+						<div class = "modal-body">Тут будут категории</div>
+						<div class = "modal-body">Тут будут категории</div>
+						<div class = "modal-body">Тут будут категории</div>
+						<div class = "modal-body">Тут будут категории</div>
+						<div class = "modal-body">Тут будут категории</div>
+					</div>
+					<div id = "overlay"></div>
+				</div>
+
+				<!-- Логотип -->
+				<img src = "images/logo.png" id = "logo"></img>
+
+				<!-- Поисковик -->
+				<img src = "images/lupa.png" id = "lupa"></img>
+
+				
+			</div>
+
+			
+		</div>
+
+		<!-- Тело сайта -->
+		<div class = "my-body">
+
+			<!-- Пытаюсь сделать вывод всех элементов из таблицы-->
+			<!-- <form action = "/items" method="GET">
+				<input placeholder = "name" name = "get_id"/>
+				<input placeholder = "Name" name = "get_name"/>
+			</form> -->
+
+			<!-- Тут карусель для времен года -->
+			<div class="slideshow-container">
+
+				<!-- Картинки -->
+				<div class="mySlides fade">
+				  <img src="images/img1.jpg" style="width:100%">
+				</div>
+			  
+				<div class="mySlides fade">
+				  <img src="images/img2.jpg" style="width:100%">
+				</div>
+			  
+				<div class="mySlides fade">
+				  <img src="images/img3.jpg" style="width:100%">
+				</div>
+			  </div>
+			  <br>
+			  
+			  <!-- Круглишки переключения -->
+			  <div style="text-align:center">
+				<span class="dot" onclick="showSlidesByDots(1)"></span>
+				<span class="dot" onclick="showSlidesByDots(2)"></span>
+				<span class="dot" onclick="showSlidesByDots(3)"></span>
+			  </div>
+		<div>
+		
+	</body>
+</html>

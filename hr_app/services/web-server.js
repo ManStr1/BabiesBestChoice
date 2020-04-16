@@ -30,6 +30,7 @@ function initialize() {
 module.exports.initialize = initialize;
 app.use(bodyParser.json());                                     //!
 app.use(bodyParser.urlencoded({extended: true}));               //!
+app.use(express.static('./public'))                                     //!!
 
 app.get('/:id', async (req, res) => {                                            //!
   var sql = `SELECT item_id, item_name, item_size FROM ` + req.params.id;
