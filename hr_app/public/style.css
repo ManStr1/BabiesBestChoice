@@ -91,6 +91,12 @@ div.my-body {
 	padding: 10px 10px;
 }
 
+.modal-body:hover {
+	background-color: #f7aaa4;
+	padding: 10px 10px;
+	cursor: pointer;
+}
+
 #overlay {
 	position: fixed;
 	opacity: 0;

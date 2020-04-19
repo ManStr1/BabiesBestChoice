@@ -27,15 +27,14 @@
 							<div class = "title">Категории</div>
 							<button data-close-button class = "close-button">&times;</button>
 						</div>
-						<div class = "modal-body">
-							Тут будут категории
+						<div class = "modal-body" onclick="window.location='/create_item';">
+							Добавить предмет
 						</div>
-						<div class = "modal-body">Тут будут категории</div>
-						<div class = "modal-body">Тут будут категории</div>
-						<div class = "modal-body">Тут будут категории</div>
-						<div class = "modal-body">Тут будут категории</div>
-						<div class = "modal-body">Тут будут категории</div>
-						<div class = "modal-body">Тут будут категории</div>
+						
+						<% for (var category of categories) { %>
+						<div class = "modal-body" onclick="window.location='/categories/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
+						<% } %>
+						
 					</div>
 					<div id = "overlay"></div>
 				</div>

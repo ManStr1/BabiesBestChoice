@@ -3,8 +3,7 @@ const express = require('express');
 const webServerConfig = require('../config/web-server.js');
 const database = require('./database.js');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');                                            //!
-var artists;
+const bodyParser = require('body-parser');                                       
 const app = express();
 let httpServer;
  
@@ -28,38 +27,55 @@ function initialize() {
 }
  
 module.exports.initialize = initialize;
-app.use(bodyParser.json());                                     //!
-app.use(bodyParser.urlencoded({extended: true}));               //!
-app.use(express.static('./public'))                                     //!!
 
-app.get('/:id', async (req, res) => {                                            //!
-  var sql = `SELECT item_id, item_name, item_size FROM ` + req.params.id;
+app.use(bodyParser.json());                                     
+app.use(bodyParser.urlencoded({extended: true}));               
+app.use(express.static('./public'))                                     
+app.set('view engine', 'ejs');
+
+
+
+app.get('/', async function (req, res) {
+  var sql = `SELECT category_name FROM categories`;
+  var categories = await database.simpleExecute(sql, {});
+  res.render('index', { categories: categories.rows });
+})
+
+app.get('/categories/:category_name', async function(req, res) {
+  var sql = `SELECT item_name, item_description, item_price, item_size, item_color FROM items NATURAL JOIN categories WHERE category_name = :c`;
+  var items_by_category = await database.simpleExecute(sql, [req.params.category_name], {});
+  res.render('items_by_category', {items: items_by_category.rows});
+})   
+
+app.get('/items', async (req, res) => {                                            
+  var sql = `SELECT item_id, item_name, item_size FROM items`;
   var result = await database.simpleExecute(sql, {});
 
   res.send(result.rows);
 });
 
-app.get('/artists/:id', async function (req, res) {                                   //!
+app.get('/items/:id', async function (req, res) {                                  
   const result = await database.simpleExecute(`SELECT item_id, item_name, item_size FROM items WHERE item_id = :idbv`, [req.params.id], { maxRows:1 });
   res.send(result.rows[0]);
 })
 
-app.put('/artists/:id', function(req, res) {                                        //!
-  //database.simpleExecute('SELECT item_id, item_name from items where item_id = ' + Number(req.params.id) + '');
-  console.log(req.params);
-  var artist = artists.find(function (artist1) {
-    return artist1.id === Number(req.params.id)
-  });
-  artist.name = req.body.name;
-  res.send(artist);
+app.post('/users', (req, res) => {
+  const user_name = req.body.create_user_name;
+  const user_password = req.body.create_user_password;
+
+  const result = database.simpleExecute(`INSERT INTO users(user_name, user_password) VALUES (:a, :b)`, [user_name, user_password], {});
+
+  res.send(result);
 })
 
-app.delete('/artists/:id', function (req, res) {                                    //!
-  artists = artists.filter( function (artist) {
-    return artist.id !== Number(req.params.id);
-  });
-  res.send(artists);
-}) 
+app.get('/users', async (req, res) => {                                            
+  var sql = `SELECT user_id, user_name, user_password, user_role FROM users`;
+  var result = await database.simpleExecute(sql, {});
+
+  res.render('users', { title: 'User Details', items: result.rows});
+});
+
+
 
 function close() {
   return new Promise((resolve, reject) => {
