@@ -19,6 +19,99 @@ div.my-body {
 	margin: 0px auto 0px auto;
 }
 
+.for-items {
+	padding-left: 25px;
+	max-width: 980px;
+}
+
+.my-item {
+	position: relative;
+	width: 232px;
+	height: 350px;
+	border: 1px solid #f7aaa4;
+	float:left;
+	margin-left: 25px;
+	margin-top: 25px;
+}
+
+#item-padding {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	font-family: 'Arial';
+	font-size: 18px;
+}
+
+#item-image {
+	width: 192px;
+	height: 192px;
+}
+
+#item-description {
+	margin-top: 10px;
+}
+
+#item-price {
+	color: rgb(244, 74, 74);
+	font-size: 22px;
+}
+
+.my-item-page {
+	max-width: 1000px;
+	max-height: 800px;
+}
+
+#my-item-images-page {
+	float: left;
+	width: 530px;
+	height: 590px;
+	max-height: 590px;
+	max-width: 530px;
+	border-bottom: 1px solid #f0eef3;
+}
+
+#my-item-base-image-page {
+	position: relative;
+	max-width: 530px;
+	height: 475px;
+	border-bottom: 1px solid #f0eef3;
+}
+
+#my-item-base-image {
+	top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+	position: relative;
+	max-width: 480px;
+	max-height: 425px;
+	border: 1px solid #000000;
+}
+
+#my-item-second-images {
+	display: table;
+	margin: auto;
+	max-width: 530px;
+	max-height: 110px;
+}
+
+#my-second-image {
+	float: left;
+	display: table-cell;
+	max-width: 110px;
+	max-height: 110px;
+	border: 1px solid #f0eef3;
+}
+
+#my-item-description-page {
+	float: right;
+	width: 469px;
+	height: 590px;
+	max-height: 590px;
+	border-left: 1px solid #f0eef3;
+	border-bottom: 1px solid #f0eef3;
+}
+
 #settings {
 	background-image: url(images/settings.png);
 	height: 60px;

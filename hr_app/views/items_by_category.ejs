@@ -1,35 +1,91 @@
+﻿<!TYPE html>
 <html>
 
-<head></head>
-<title name = "title">ПРИВЕТ</title>
-<link rel="stylesheet" type="text.css" href="/css/bootstrap.min.css">
+    <head>
+		<link href = "../style.css" rel = "stylesheet">
+		<meta http-equiv = "Content-Type" content = "text/html"; charset = "UTF-8">
+		<title>BBC</title>
+		<script defer src = "../script-by-category.js"></script>
+	</head>
+	
+	<body class = "main-body">
+		
 
-<body>
-    <div class="container"></div>
-    <center>
-        <div class="well"><b>Items Details</b></div>
-    </center>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th> 
-                <th>Price</th>
-                <th>Size</th>
-                <th>Color</th>
-            </tr>
-            <% for (var item of items) { %>
-            <tr>
-                <th><%= item.ITEM_NAME %></th>
-                <th><%= item.ITEM_DESCRIPTION %></th>
-                <th><%= item.ITEM_PRICE %></th>
-                <th><%= item.ITEM_SIZE %></th>
-                <th><%= item.ITEM_COLOR %></th>
+		<!-- Для всей головы -->
+		<div class = "header">
 
-            </tr>
-            <% } %>
-        </thead>
-    </table>
-</body>
+			<!-- Линия наверху -->
+			<div class = "header-line"></div> 
+
+			<!-- Мой блок для головы -->
+			<div class = "myinline-block">		
+
+				<!-- Кнопка навигации -->
+				<div class = "navigation">
+					<button data-modal-target = "#modal" id = "settings"></button>
+					<div class = "modal" id = "modal">
+						<div class = "modal-header">
+							<div class = "title">Категории</div>
+							<button data-close-button class = "close-button">&times;</button>
+						</div>
+						<div class = "modal-body" onclick="window.location='/create_item';">
+							Добавить предмет
+						</div>
+						
+						<% for (var category of categories) { %>
+						<div class = "modal-body" onclick="window.location='/categories/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
+						<% } %>
+						
+						
+					</div>
+					<div id = "overlay"></div>
+				</div>
+
+				<!-- Логотип -->
+				<img src = "../images/logo.png" id = "logo"></img>
+
+				<!-- Поисковик -->
+				<img src = "../images/lupa.png" id = "lupa"></img>
+
+				
+			</div>
+
+			
+		</div>
+
+		<!-- Тело сайта -->
+		<div class = "my-body">
+            
+            <div class = "for-items">
+
+                <% for (var item of items) { %>
+                    <div class ="my-item">
+
+                        <div id = "item-padding">
+
+                            <% for (var image of images) { %>
+                                <% if (image.ITEM_ARTICUL == item.ARTICUL) { %>
+                                    <img id = "item-image" onclick="window.location='/categories/<%= category.CATEGORY_NAME %>/<%= item.ARTICUL %>';" src="../images/<%= image.IMAGE_NAME %>.jpg">   
+                                    <% break %> 
+                                <% } %>    
+                            <% } %>
+                            <div id = "item-description"><%= item.ITEM_NAME %></div>
+                            <div id = "item-description">
+                                <div id = "item-price">
+                                    <%= item.ITEM_PRICE %> tg.
+                                </div>
+                            </div>
+                            <div id = "item-description">Producer:<%= item.PRODUCER_NAME %></div>
+                        
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+		</div>
+	</body>
 
 </html>
+

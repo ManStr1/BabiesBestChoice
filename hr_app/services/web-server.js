@@ -42,38 +42,38 @@ app.get('/', async function (req, res) {
 })
 
 app.get('/categories/:category_name', async function(req, res) {
-  var sql = `SELECT item_name, item_description, item_price, item_size, item_color FROM items NATURAL JOIN categories WHERE category_name = :c`;
+
+  var sql = `SELECT item_name, item_price, producer_name, articul FROM items NATURAL JOIN categories NATURAL JOIN producers 
+              WHERE category_name = :c 
+              GROUP BY (item_name, item_price, producer_name, articul)`;
+
   var items_by_category = await database.simpleExecute(sql, [req.params.category_name], {});
-  res.render('items_by_category', {items: items_by_category.rows});
+
+
+  var sql2 = `SELECT category_name FROM categories`;
+  var categories = await database.simpleExecute(sql2, {});
+
+  var sql3 = `SELECT ITEM_ARTICUL, IMAGE_NAME FROM IMAGES`;
+  var images = await database.simpleExecute(sql3, {});
+
+  res.render('items_by_category', {items: items_by_category.rows, categories: categories.rows, images: images.rows});
+  
 })   
 
-app.get('/items', async (req, res) => {                                            
-  var sql = `SELECT item_id, item_name, item_size FROM items`;
-  var result = await database.simpleExecute(sql, {});
+app.get('/categories/:category_name/:item_articul', async function(req, res) {
+  
+  var sql = `SELECT item_name, item_description, item_price, item_size, item_number, item_color FROM items NATURAL JOIN categories WHERE articul = :c AND category_name = :v`;
+  var item = await database.simpleExecute(sql, [req.params.item_articul, req.params.category_name], {});
 
-  res.send(result.rows);
-});
+  var sql2 = `SELECT category_name FROM categories`;
+  var categories = await database.simpleExecute(sql2, {});
 
-app.get('/items/:id', async function (req, res) {                                  
-  const result = await database.simpleExecute(`SELECT item_id, item_name, item_size FROM items WHERE item_id = :idbv`, [req.params.id], { maxRows:1 });
-  res.send(result.rows[0]);
+  var sql3 = `SELECT IMAGE_NAME FROM IMAGES WHERE ITEM_ARTICUL = :c`;
+  var images = await database.simpleExecute(sql3, [req.params.item_articul],{});
+
+  res.render('item', {items: item.rows, categories: categories.rows , images: images.rows})
+
 })
-
-app.post('/users', (req, res) => {
-  const user_name = req.body.create_user_name;
-  const user_password = req.body.create_user_password;
-
-  const result = database.simpleExecute(`INSERT INTO users(user_name, user_password) VALUES (:a, :b)`, [user_name, user_password], {});
-
-  res.send(result);
-})
-
-app.get('/users', async (req, res) => {                                            
-  var sql = `SELECT user_id, user_name, user_password, user_role FROM users`;
-  var result = await database.simpleExecute(sql, {});
-
-  res.render('users', { title: 'User Details', items: result.rows});
-});
 
 
 

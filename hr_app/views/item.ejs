@@ -1,10 +1,10 @@
-﻿<!TYPE html>
+<!TYPE html>
 <html>
 	<head>
-		<link href = "style.css" rel = "stylesheet">
+		<link href = "../../style.css" rel = "stylesheet">
 		<meta http-equiv = "Content-Type" content = "text/html"; charset = "UTF-8">
 		<title>BBC</title>
-		<script defer src = "script.js"></script>
+		<script defer src = "../../script-item.js"></script>
 	</head>
 	
 	<body class = "main-body">
@@ -35,15 +35,17 @@
 						<div class = "modal-body" onclick="window.location='/categories/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
 						<% } %>
 
+						
+						
 					</div>
 					<div id = "overlay"></div>
 				</div>
 
 				<!-- Логотип -->
-				<img src = "images/logo.png" id = "logo"></img>
+				<img src = "../../images/logo.png" id = "logo"></img>
 
 				<!-- Поисковик -->
-				<img src = "images/lupa.png" id = "lupa"></img>
+				<img src = "../../images/lupa.png" id = "lupa"></img>
 
 				
 			</div>
@@ -53,34 +55,33 @@
 
 		<!-- Тело сайта -->
 		<div class = "my-body">
+            
+            <div class = "my-item-page">
+                
+                <div id = "my-item-images-page">
 
+                    <div id = "my-item-base-image-page">
+                        <img id = "my-item-base-image" src="../../images/<%= images[0].IMAGE_NAME %>.jpg">
+                    </div>
+                    
+                    
+                    <div id = "my-item-second-images" >
+                        <% for (var i = 0; i < images.length; i++) { %>
+                            <img id = "my-second-image" onclick="myFunction(this);" src="../../images/<%= images[i].IMAGE_NAME %>.jpg">
+                        <% } %>
+                    </div>
 
-			<!-- Тут карусель для времен года -->
-			<div class="slideshow-container">
+                    
+                </div>
 
-				<!-- Картинки -->
-				<div class="mySlides fade">
-				  <img src="images/img1.jpg" style="width:100%">
-				</div>
-			  
-				<div class="mySlides fade">
-				  <img src="images/img2.jpg" style="width:100%">
-				</div>
-			  
-				<div class="mySlides fade">
-				  <img src="images/img3.jpg" style="width:100%">
-				</div>
-			  </div>
-			  <br>
-			  
-			  <!-- Круглишки переключения -->
-			  <div style="text-align:center">
-				<span class="dot" onclick="showSlidesByDots(1)"></span>
-				<span class="dot" onclick="showSlidesByDots(2)"></span>
-				<span class="dot" onclick="showSlidesByDots(3)"></span>
-			  </div>
-			</div>
-		</div>
+                <div id = "my-item-description-page">
+                    HJEY
+                </div>
+
+            </div>
+
+        </div>
+        
 	</body>
 </html>
 
