@@ -1,4 +1,4 @@
-<!TYPE html>
+﻿<!TYPE html>
 <html>
 	<head>
 		<link href = "../../style.css" rel = "stylesheet">
@@ -32,7 +32,7 @@
 						</div>
 						
 						<% for (var category of categories) { %>
-						<div class = "modal-body" onclick="window.location='/categories/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
+						<div class = "modal-body" onclick="window.location='/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
 						<% } %>
 
 						
@@ -42,10 +42,23 @@
 				</div>
 
 				<!-- Логотип -->
-				<img src = "../../images/logo.png" id = "logo"></img>
+				<a href="../../"><img src = "../../images/logo.png" id = "logo"></img></a>
 
 				<!-- Поисковик -->
-				<img src = "../../images/lupa.png" id = "lupa"></img>
+				<div class="topnav">
+					
+					<div class="search-container">
+
+						<form action = "/search_result" method="POST">
+
+							<input name="search_item" type="text" placeholder="Search.." />
+							<button type="submit"><i class="fa fa-search"></i></button>
+						
+						</form>
+					</div>
+
+					
+				</div>
 
 				
 			</div>
@@ -75,7 +88,35 @@
                 </div>
 
                 <div id = "my-item-description-page">
-                    HJEY
+					
+					<div id = "my-item-description-page-inside">
+
+						<h1><%= items[0].ITEM_NAME %></h1>
+						<div id = "item-articul">Articul: <%= items[0].ARTICUL %></div>
+						
+						<div id = "tab-border">
+							Sizes:
+						</div>
+						
+						<div class="tab">
+							<% for (var i = 0; i < sizes.length; i++) { %>
+							<button class="tablinks" onclick="pick(event)"><%= sizes[i].ITEM_SIZE %></button>
+							<% } %>
+						</div>
+
+						<div id = "tab-border">
+							Colors:
+						</div>
+
+						<div class="tab2">
+							<% for (var i = 0; i < colors.length; i++) { %>
+								<button class="tablinks2" onclick="pick2(event)"><%= colors[i].ITEM_COLOR %></button>
+							<% } %>
+						</div>
+						
+						  
+					</div>
+					
                 </div>
 
             </div>

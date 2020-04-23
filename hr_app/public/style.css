@@ -6,7 +6,6 @@
 div.header {
 	width: 1000px; 
 	height: 92px;
-	/* background: #FFFFFF; */
 	margin: 0px auto 0px auto;
 }
 
@@ -19,6 +18,58 @@ div.my-body {
 	margin: 0px auto 0px auto;
 }
 
+.myinline-block {
+	height: 100px;
+}
+
+#logo {
+	float: left;
+}
+
+/* Add a black background color to the top navigation bar */
+.topnav {
+	overflow: hidden;
+	width: fit-content;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+  /* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+	width: 350px;
+	border-radius: 10px;
+	padding: 11px;
+	border: none;
+	font-size: 17px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.topnav .search-container {
+	float: right;
+	height: 100px;
+}
+
+.topnav .search-container button {
+	border-radius: 10px;
+	float: right;
+	padding: 21px 21px;
+	margin-top: 20px;
+	background-color: #ddd;
+	background-image: url(../../images/lupa.png);
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+  }
+  
+.topnav .search-container button:hover {
+	background: #f7aaa4;
+	background-image: url(../../images/lupa.png);
+}
+
 .for-items {
 	padding-left: 25px;
 	max-width: 980px;
@@ -27,7 +78,7 @@ div.my-body {
 .my-item {
 	position: relative;
 	width: 232px;
-	height: 350px;
+	height: 414px;
 	border: 1px solid #f7aaa4;
 	float:left;
 	margin-left: 25px;
@@ -44,7 +95,7 @@ div.my-body {
 
 #item-image {
 	width: 192px;
-	height: 192px;
+	height: 256px;
 }
 
 #item-description {
@@ -56,7 +107,78 @@ div.my-body {
 	font-size: 22px;
 }
 
+#item-articul {
+	font-size: 14px;
+	color: #777;
+	margin-bottom: 50px;
+}
+
+.tab {
+	width: fit-content;
+	overflow: hidden;
+	margin-bottom: 50px;
+}
+
+.tab button {
+	max-width: 100px;
+	margin-left: 5px;
+	border-radius: 5px;
+	background-color: #f1f1f1;
+	float: left;
+	border: 1px solid #f1f1f1;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+}
+
+.tab button:hover {
+	background-color: #ddd;
+}
+
+.tab button.active {
+	border: 1px solid #f7aaa4;
+	background-color: #ccc;
+}
+
+.tab2 {
+	width: fit-content;
+	overflow: hidden;
+	margin-bottom: 50px;
+}
+
+.tab2 button {
+	max-width: 100px;
+	margin-left: 5px;
+	border-radius: 5px;
+	background-color: #f1f1f1;
+	float: left;
+	border: 1px solid #f1f1f1;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+}
+
+.tab2 button:hover {
+	background-color: #ddd;
+}
+
+.tab2 button.active {
+	border: 1px solid #f7aaa4;
+	background-color: #ccc;
+}
+
+#tab-border {
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-style: oblique;
+}
+
+
 .my-item-page {
+	width: 1000px;
+	height: 800px;
 	max-width: 1000px;
 	max-height: 800px;
 }
@@ -112,6 +234,10 @@ div.my-body {
 	border-bottom: 1px solid #f0eef3;
 }
 
+#my-item-description-page-inside {
+	padding-left: 50px;
+}
+
 #settings {
 	background-image: url(images/settings.png);
 	height: 60px;
@@ -125,7 +251,7 @@ div.my-body {
 
 .navigation {
 	position: relative;
-	width: 150px;
+	width: 75px;
 	height: 77px;
 	float: left;
 }

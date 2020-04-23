@@ -1,16 +1,15 @@
-﻿<!TYPE html>
+<!TYPE html>
 <html>
 	<head>
-		<link href = "style.css" rel = "stylesheet">
+		<link href = "../../style.css" rel = "stylesheet">
 		<meta http-equiv = "Content-Type" content = "text/html"; charset = "UTF-8">
 		<title>BBC</title>
-		<script defer src = "script.js"></script>
+		<script defer src = "../../script-by-category.js"></script>
 	</head>
 	
 	<body class = "main-body">
-		
 
-		<!-- Для всей головы -->
+        <!-- Для всей головы -->
 		<div class = "header">
 
 			<!-- Линия наверху -->
@@ -42,7 +41,7 @@
 				</div>
 
 				<!-- Логотип -->
-				<a href="/"><img src = "images/logo.png" id = "logo"></img></a>
+				<a href="/"><img src = "../../images/logo.png" id = "logo"></img></a>
 
 				<!-- Поисковик -->
 				<div class="topnav">
@@ -61,39 +60,11 @@
 				</div>
 			</div>
 
-			
 		</div>
 
 		<!-- Тело сайта -->
 		<div class = "my-body">
-
-
-			<!-- Тут карусель для времен года -->
-			<div class="slideshow-container">
-
-				<!-- Картинки -->
-				<div class="mySlides fade">
-				  <img src="images/img1.jpg" style="width:100%">
-				</div>
-			  
-				<div class="mySlides fade">
-				  <img src="images/img2.jpg" style="width:100%">
-				</div>
-			  
-				<div class="mySlides fade">
-				  <img src="images/img3.jpg" style="width:100%">
-				</div>
-			  </div>
-			  <br>
-			  
-			  <!-- Круглишки переключения -->
-			  <div style="text-align:center">
-				<span class="dot" onclick="showSlidesByDots(1)"></span>
-				<span class="dot" onclick="showSlidesByDots(2)"></span>
-				<span class="dot" onclick="showSlidesByDots(3)"></span>
-			  </div>
-			</div>
+			<H2><%= message %></H2>
 		</div>
-	</body>
+    </body>
 </html>
-

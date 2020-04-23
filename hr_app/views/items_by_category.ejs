@@ -33,7 +33,7 @@
 						</div>
 						
 						<% for (var category of categories) { %>
-						<div class = "modal-body" onclick="window.location='/categories/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
+						<div class = "modal-body" onclick="window.location='/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
 						<% } %>
 						
 						
@@ -42,11 +42,24 @@
 				</div>
 
 				<!-- Логотип -->
-				<img src = "../images/logo.png" id = "logo"></img>
+				<a href="../"><img src = "../images/logo.png" id = "logo"></img></a>
 
+				
 				<!-- Поисковик -->
-				<img src = "../images/lupa.png" id = "lupa"></img>
+				<div class="topnav">
+					
+					<div class="search-container">
 
+						<form action = "/search_result" method="POST">
+
+							<input name="search_item" type="text" placeholder="Search.." />
+							<button type="submit"><i class="fa fa-search"></i></button>
+						
+						</form>
+					</div>
+
+					
+				</div>
 				
 			</div>
 
@@ -55,6 +68,7 @@
 
 		<!-- Тело сайта -->
 		<div class = "my-body">
+			<h2><%= message %></h2>
             
             <div class = "for-items">
 
@@ -65,7 +79,7 @@
 
                             <% for (var image of images) { %>
                                 <% if (image.ITEM_ARTICUL == item.ARTICUL) { %>
-                                    <img id = "item-image" onclick="window.location='/categories/<%= category.CATEGORY_NAME %>/<%= item.ARTICUL %>';" src="../images/<%= image.IMAGE_NAME %>.jpg">   
+                                    <img id = "item-image" onclick="window.location='/<%= item.CATEGORY_NAME %>/<%= item.ARTICUL %>';" src="../images/<%= image.IMAGE_NAME %>.jpg">   
                                     <% break %> 
                                 <% } %>    
                             <% } %>
