@@ -27,9 +27,6 @@
 							<div class = "title">Категории</div>
 							<button data-close-button class = "close-button">&times;</button>
 						</div>
-						<div class = "modal-body" onclick="window.location='/create_item';">
-							Добавить предмет
-						</div>
 						
 						<% for (var category of categories) { %>
 						<div class = "modal-body" onclick="window.location='/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
@@ -87,36 +84,44 @@
                     
                 </div>
 
-                <div id = "my-item-description-page">
-					
+                <div class = "my-item-description-page">
+					<form id = "form-item">
 					<div id = "my-item-description-page-inside">
 
 						<h1><%= items[0].ITEM_NAME %></h1>
 						<div id = "item-articul">Articul: <%= items[0].ARTICUL %></div>
 						
 						<div id = "tab-border">
-							Sizes:
+							Size:
 						</div>
 						
 						<div class="tab">
 							<% for (var i = 0; i < sizes.length; i++) { %>
-							<button class="tablinks" onclick="pick(event)"><%= sizes[i].ITEM_SIZE %></button>
+							<div class="tablinks" onclick="pick(event)"><%= sizes[i].ITEM_SIZE %></div>
 							<% } %>
 						</div>
 
 						<div id = "tab-border">
-							Colors:
+							Color:
 						</div>
 
 						<div class="tab2">
 							<% for (var i = 0; i < colors.length; i++) { %>
-								<button class="tablinks2" onclick="pick2(event)"><%= colors[i].ITEM_COLOR %></button>
+								<div class="tablinks2" onclick="pick2(event)"><%= colors[i].ITEM_COLOR %></div>
 							<% } %>
 						</div>
 						
-						  
+						<div id = "price">
+							<%= items[0].ITEM_PRICE %> tg.
+						</div>
+
+						<button type="submit" class="buy-button">Buy</button>	
 					</div>
-					
+					</form>
+
+					<div id = "my-item-description">
+						Description:<%= items[0].ITEM_DESCRIPTION %>
+					</div>
                 </div>
 
             </div>

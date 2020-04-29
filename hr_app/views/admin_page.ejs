@@ -1,0 +1,204 @@
+<!TYPE html>
+<html>
+    <head>
+		<link href = "adminstyle.css" rel = "stylesheet">
+		<meta http-equiv = "Content-Type" content = "text/html"; charset = "UTF-8">
+		<title>BBC</title>
+		<script defer src = "admin.js"></script>
+    </head>
+    <body>
+        <div class="tab">
+          <button class="tablinks" onclick="openTable(event, 'Items_table')">Items</button>
+          <button class="tablinks" onclick="openTable(event, 'Categories_table')">Categories</button>
+          <button class="tablinks" onclick="openTable(event, 'Producers_table')">Producers</button>
+          <button class="tablinks" onclick="openTable(event, 'Articuls_table')">Articuls</button>
+          <button class="tablinks" onclick="openTable(event, 'Images_table')">Images</button>
+          <button class="tablinks" onclick="openTable(event, 'Users_table')">Users</button>
+        </div>
+        <div id="Items_table" class="tabcontent">
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."/>
+
+          <div style="overflow-x:auto; overflow-y: auto; height: 300px;">
+              <table id ="myTable">
+                <tr>
+                  <th onclick="sortTable(0)">Name</th>
+                  <th onclick="sortTable(1)">Articul</th>
+                  <th onclick="sortTable(2)">Description</th>
+                  <th onclick="sortTable(3)">Price</th>
+                  <th>Size</th>
+                  <th>Color</th>
+                  <th onclick="sortTable(4)">Discount</th>
+                  <th onclick="sortTable(5)">Category</th>
+                  <th onclick="sortTable(6)">Producer</th>
+                </tr>
+                <% for (var item of items) { %>
+                <tr>
+                  <td><%= item.ITEM_NAME %></td>
+                  <td><%= item.ARTICUL %></td>
+                  <td><%= item.ITEM_DESCRIPTION %></td>
+                  <td><%= item.ITEM_PRICE %></td>
+                  <td>
+                    <select>
+                      <% for (size of items_size) { %>
+                        <% if (item.ARTICUL == size.ARTICUL) { %>
+                        
+                          <option><%= size.ITEM_SIZE %></option>
+                        
+                        <% } %>
+                      <% } %>
+                    </select> 
+                  </td>
+                  <td>
+                    <select>
+                      <% for (color of items_color) { %>
+                        <% if (item.ARTICUL == color.ARTICUL) { %>
+                        
+                          <option><%= color.ITEM_COLOR %></option>
+                        
+                        <% } %>
+                      <% } %>
+                    </select> 
+                  </td>
+                  <td><%= item.ITEM_DISCOUNT %></td>
+                  <td><%= item.CATEGORY_NAME %></td>
+                  <td><%= item.PRODUCER_NAME %></td>
+                </tr>
+                <% } %>
+                
+              </table>
+          </div>
+
+          <div id="add-item" style="padding-top: 30px;">
+            CREATE ITEM:
+            <form action="/create_item" method="POST">
+              <input placeholder="Item articul" name="articul"/>
+              <input placeholder="Item name" name="name"/>
+              <input placeholder="Item description" name="description"/>
+              <input placeholder="Item price" name="price"/>
+              <input placeholder="Item sizes for ex: 1,2,3" name="size"/>
+              <input placeholder="Item number" name="number"/>
+              <input placeholder="Item discount" name="discount"/>
+              <input placeholder="Item color " name="color"/>
+              <input placeholder="Item category" name="category"/>
+              <input placeholder="Item producer" name="producer"/>
+              <button>Submit</button>
+            </form>
+          </div>
+
+          <div id="add-item" style="padding-top: 30px;">
+            DELETE ITEM
+            <form action="/delete_item" method="POST">
+              <input placeholder="Item articul" name="itemarticul"/>
+              <button>Submit</button>
+            </form>
+          </div>
+
+        </div>
+
+        <div id="Categories_table" class="tabcontent">
+          <div style="overflow-x:auto; overflow-y: auto; height: 300px;">
+              <table id ="myTable">
+                <tr>
+                  <th>Name</th>
+                  <th>ID</th>
+                </tr>
+                <% for (var category of categories) { %>
+                <tr>
+                  <td><%= category.CATEGORY_NAME %></td>
+                  <td><%= category.CATEGORY_ID %></td>
+                </tr>
+                <% } %>
+              </table>
+          </div>
+        </div>
+
+        <div id="Producers_table" class="tabcontent">
+          <div style="overflow-x:auto; overflow-y: auto; height: 300px;">
+              <table id ="myTable">
+                <tr>
+                  <th>Name</th>
+                  <th>ID</th>
+                </tr>
+                <% for (var producer of producers) { %>
+                <tr>
+                  <td><%= producer.PRODUCER_NAME %></td>
+                  <td><%= producer.PRODUCER_ID %></td>
+                </tr>
+                <% } %>
+              </table>
+          </div>
+        </div>
+
+        <div id="Articuls_table" class="tabcontent">
+          <div style="overflow-x:auto; overflow-y: auto; height: 300px;">
+              <table id ="myTable">
+                <tr>
+                  <th>Name</th>
+                </tr>
+                <% for (var articul of articuls) { %>
+                  <tr>
+                    <td><%= articul.ARTICUL_NAME %></td>
+                  </tr>
+                <% } %>
+              </table>
+          </div>
+        </div>
+
+        <div id="Images_table" class="tabcontent">
+          <div style="overflow-x:auto; overflow-y: auto; height: 300px;">
+              <table id ="myTable">
+                <tr>
+                  <th>Item articul</th>
+                  <th>Image name</th>
+                </tr>
+                <% for (var image of images) { %>
+                  <tr>
+                    <td><%= image.ITEM_ARTICUL %></td>
+                    <td><%= image.IMAGE_NAME %></td>
+                  </tr>
+                <% } %>
+              </table>
+          </div>
+
+          <div id="add-item" style="padding-top: 30px;">
+            <form action="/create_images" method="POST">
+              <input placeholder="Item articul" name="itemarticul"/>
+              <input placeholder="Images (1.jpg,2.jpg)" name="itemimages"/>
+              <button>Submit</button>
+            </form>
+          </div>
+        </div>
+
+        <div id="Users_table" class="tabcontent">
+          <div style="overflow-x:auto; overflow-y: auto; height: 300px;">
+              <table id ="myTable">
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                </tr>
+                <% for (var user of users) { %>
+                  <tr>
+                    <td><%= user.USER_ID %></td>
+                    <td><%= user.USER_NAME %></td>
+                    <td><%= user.USER_ROLE %></td>
+                  </tr>
+                <% } %>
+              </table>
+          </div>
+
+          <div id="add-item" style="padding-top: 30px;">
+            <form action="/change_user" method="POST">
+              <input placeholder="User ID" name="userid"/>
+              <select name="userrole">
+                <% for (role of roles) { %>
+                  <option><%= role.USER_ROLE %></option>
+                <% } %>
+              </select> 
+              <button>Submit</button>
+            </form>
+          </div>
+        </div>
+
+    </body>
+</html>

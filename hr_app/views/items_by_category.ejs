@@ -28,9 +28,6 @@
 							<div class = "title">Категории</div>
 							<button data-close-button class = "close-button">&times;</button>
 						</div>
-						<div class = "modal-body" onclick="window.location='/create_item';">
-							Добавить предмет
-						</div>
 						
 						<% for (var category of categories) { %>
 						<div class = "modal-body" onclick="window.location='/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
@@ -68,36 +65,70 @@
 
 		<!-- Тело сайта -->
 		<div class = "my-body">
+			<% if (panel == true) { %>
+
+			<form id = "sort-form" action = "/<%= items[0].CATEGORY_NAME %>" method="POST">
+				<div class = "sorting-container">
+
+					<div class = "sort-item-size">
+						Size:<input name="sort_size" type="number" min="1" max="300" value="1"/>
+					</div>
+	
+					<div class = "sort-item-price">
+						Price: <input name="sort_price_from" type="number" min="1" max="300000" value="1"/> - 
+						<input name="sort_price_to" type="number" min="1" max="300000" value="300000"/>
+						<button type="submit">Find</button>
+					</div>
+					
+					<div class="sort-by-price">
+						<label class="sorting-button-up">Price up
+							<input type="radio" name="radio" value="price_up">
+							<span class="checkmark"></span>
+						</label>
+						
+						<label class="sorting-button-up">Price down
+							<input type="radio" name="radio" value="price_down">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+					
+				</div>
+			</form>
+
+
+			<% } %>
+
 			<h2><%= message %></h2>
-            
+
             <div class = "for-items">
+				
+				<% for (var item of items) { %>
+					<div class ="my-item">
 
-                <% for (var item of items) { %>
-                    <div class ="my-item">
+						<div id = "item-padding">
 
-                        <div id = "item-padding">
+							<% for (var image of images) { %>
+								<% if (image.ITEM_ARTICUL == item.ARTICUL) { %>
+									<img id = "item-image" onclick="window.location='/<%= item.CATEGORY_NAME %>/<%= item.ARTICUL %>';" src="../images/<%= image.IMAGE_NAME %>.jpg">   
+									<% break %> 
+								<% } %>    
+							<% } %>
+							<div id = "item-description"><%= item.ITEM_NAME %></div>
+							<div id = "item-description">
+								<div id = "item-price">
+									<%= item.ITEM_PRICE %> tg.
+								</div>
+							</div>
+							<div id = "item-description">Producer:<%= item.PRODUCER_NAME %></div>
+						
+						</div>
 
-                            <% for (var image of images) { %>
-                                <% if (image.ITEM_ARTICUL == item.ARTICUL) { %>
-                                    <img id = "item-image" onclick="window.location='/<%= item.CATEGORY_NAME %>/<%= item.ARTICUL %>';" src="../images/<%= image.IMAGE_NAME %>.jpg">   
-                                    <% break %> 
-                                <% } %>    
-                            <% } %>
-                            <div id = "item-description"><%= item.ITEM_NAME %></div>
-                            <div id = "item-description">
-                                <div id = "item-price">
-                                    <%= item.ITEM_PRICE %> tg.
-                                </div>
-                            </div>
-                            <div id = "item-description">Producer:<%= item.PRODUCER_NAME %></div>
-                        
-                        </div>
+					</div>
 
-                    </div>
-
-                <% } %>
-
-            </div>
+				<% } %>
+				
+			</div>
+			<br><br>
 		</div>
 	</body>
 

@@ -8,7 +8,6 @@
 	</head>
 	
 	<body class = "main-body">
-		
 
 		<!-- Для всей головы -->
 		<div class = "header">
@@ -27,9 +26,12 @@
 							<div class = "title">Категории</div>
 							<button data-close-button class = "close-button">&times;</button>
 						</div>
-						<div class = "modal-body" onclick="window.location='/create_item';">
-							Добавить предмет
+
+						<% if (roles[0].USER_ROLE == "Admin") { %>
+						<div class = "modal-body" onclick="window.location='/admin_menu';">
+							Панель управления
 						</div>
+						<% } %>
 						
 						<% for (var category of categories) { %>
 						<div class = "modal-body" onclick="window.location='/<%= category.CATEGORY_NAME %>';"><%= category.CATEGORY_NAME %></div>
@@ -59,6 +61,18 @@
 
 					
 				</div>
+				<div class = "login-box">
+					<% if (roles[0].USER_ROLE == "") { %>
+						<div onclick="window.location='/login'">
+							Log in
+						</div>
+					<% } else { %>
+						<div onclick="window.location='/logout'">
+							Log out
+						</div>
+					<% } %>
+				</div>
+				
 			</div>
 
 			
@@ -66,7 +80,7 @@
 
 		<!-- Тело сайта -->
 		<div class = "my-body">
-
+			<h2><%= message %></h2>
 
 			<!-- Тут карусель для времен года -->
 			<div class="slideshow-container">
@@ -93,6 +107,8 @@
 				<span class="dot" onclick="showSlidesByDots(3)"></span>
 			  </div>
 			</div>
+			
+			
 		</div>
 	</body>
 </html>
